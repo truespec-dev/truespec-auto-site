@@ -367,16 +367,22 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            confirmMsg.innerHTML = data.message || "Your request has been received!";
+        .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, status: res.status, data: d }; }); })
+        .then(function(result) {
+            console.log("Submit response:", result);
+            if (!result.ok) {
+                confirmMsg.innerHTML = "Error: " + (result.data.error || "Unknown error. Please call us.");
+            } else {
+                confirmMsg.innerHTML = result.data.message || "Your request has been received!";
+            }
             confirmMsg.style.display = "block";
             form.style.display = "none";
         })
         .catch(function(err) {
+            console.error("Submit error:", err);
             submitBtn.disabled = false;
             submitBtn.querySelector(".btn-text-content-label").textContent = "SUBMIT APPOINTMENT REQUEST";
-            confirmMsg.innerHTML = "Something went wrong. Please try again or call us directly.";
+            confirmMsg.innerHTML = "Something went wrong: " + err.message;
             confirmMsg.style.display = "block";
         });
     });
