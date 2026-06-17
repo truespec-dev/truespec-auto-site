@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>True Spec Auto Garage - Lakewood, CO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans+Condensed:ital,wght@1,700;1,800&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="outer-canvas">
+        <div class="page-wrapper">
+            
+            <div class="paper-sheet">
+            <div class="top-header-grouping">
+                <header class="main-header-enclosure">
+                    <div class="logo-badge-stamp">
+                        <img src="logo-stamp.png" alt="True Spec Auto Garage Logo" class="header-logo-image">
+                    </div>
+                    
+                    <div class="navigation-track-frame">
+                        <nav class="nav-bar-links" aria-label="Primary">
+                            <a href="#" class="nav-item-btn active">HOME</a>
+                            <a href="#" class="nav-item-btn">OUR<br>SERVICES</a>
+                            <a href="#" class="nav-item-btn">BOOK<br>APPOINTMENT</a>
+                            <a href="#" class="nav-item-btn">PARTS &<br>ACCESSORIES</a>
+                            <a href="#" class="nav-item-btn">ABOUT US</a>
+                            <a href="#" class="nav-item-btn">CONTACT</a>
+                        </nav>
+                    </div>
+                </header>
+
+                <div class="location-ribbon-banner">
+                    <h2>Automotive Excellence at Colfax & Carr!</h2>
+                </div>
+            </div>
+
+            <section class="hero-frame-container">
+                <div class="vintage-outer-bezel">
+                    <div class="vintage-inner-bezel">
+                        <div class="photo-canvas-area">
+                            <img src="garage-exterior.png" alt="True Spec Garage Exterior" class="hero-backdrop-image">
+                            <h1 class="main-hero-tagline-text">YOUR AUTOMOBILE<br>DESERVES 'TRUE SPEC' CARE!</h1>
+                            <div class="inner-shadow-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chrome-cta-wrapper">
+                    <div class="chrome-bezel-ring">
+                        <div class="chrome-inner-bevel">
+                            <button class="metallic-cta-action-btn" type="button">SCHEDULE A SERVICE NOW!</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <main class="lower-content-grid-system">
+                
+                <div class="left-side-layout-column">
+                    <div class="three-column-services-row">
+                        <div class="retro-service-tile-card">
+                            <div class="tile-icon-graphic-box">
+                                <img src="icon-engine.png" alt="Engine Tune-Up Icon" class="card-vector-asset">
+                            </div>
+                            <h3 class="tile-header-title">ENGINE TUNE-UPS</h3>
+                            <p class="tile-description-body">Getting your engine running right and running smooth. Spark plugs, oil changes, filters, and more.</p>
+                            <button class="tile-interactive-btn" type="button">LEARN MORE</button>
+                        </div>
+
+                        <div class="retro-service-tile-card">
+                            <div class="tile-icon-graphic-box">
+                                <img src="icon-brakes.png" alt="Brake Service Icon" class="card-vector-asset">
+                            </div>
+                            <h3 class="tile-header-title">BRAKES & CHASSIS SERVICE</h3>
+                            <p class="tile-description-body">Make sure your car rides true. We'll make sure your auto is smooth and predictable.</p>
+                            <button class="tile-interactive-btn" type="button">LEARN MORE</button>
+                        </div>
+
+                        <div class="retro-service-tile-card">
+                            <div class="tile-icon-graphic-box">
+                                <img src="icon-tires.png" alt="Tire Service Icon" class="card-vector-asset">
+                            </div>
+                            <h3 class="tile-header-title">COMPREHENSIVE TIRE SERVICE</h3>
+                            <p class="tile-description-body">More than just checking the air. We make sure your car has the tires it needs. Brands you trust and installation you can rely on.</p>
+                            <button class="tile-interactive-btn" type="button">LEARN MORE</button>
+                        </div>
+                    </div>
+
+                    <div class="inverted-specials-panel">
+                        <div class="specials-header-ribbon-bar">
+                            <h3 class="specials-banner-title-text">CURRENT SPECIALS</h3>
+                        </div>
+                        <div class="specials-content-interior-row">
+                            <div class="individual-special-cell">
+                                <div class="mini-specials-fallback oil-spec" aria-hidden="true"></div>
+                                <p class="cell-label-title">LUBE & OIL SPECIAL - <span class="price-tint">$X.XX</span></p>
+                            </div>
+                            <div class="individual-special-cell split-divider-dashed">
+                                <div class="mini-specials-fallback brake-spec" aria-hidden="true"></div>
+                                <p class="cell-label-title">SPRING BRAKE CHECK - <span class="price-tint">FREE</span></p>
+                            </div>
+                            <div class="individual-special-cell">
+                                <div class="mini-specials-fallback rotation-spec" aria-hidden="true"></div>
+                                <p class="cell-label-title">TIRE ROTATION - <span class="price-tint">1/2 OFF</span></p>
+                                <span class="cell-coupon-tag-code">Use code "SPRING55"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side-layout-column">
+                    <div class="vintage-scheduling-panel-box">
+                        <h3 class="scheduling-panel-header-banner">RELIABLE SERVICE ON YOUR SCHEDULE!</h3>
+                        
+                        <form class="vintage-dashboard-form" onsubmit="event.preventDefault();">
+
+                            <!-- ========================= -->
+                            <!--  TOP ROW: CAR INFO        -->
+                            <!-- ========================= -->
+                            <div class="form-top-composite-matrix">
+                        
+                                <!-- CAR INFO -->
+                                <div class="composite-field-block vehicle-identity-inputs">
+                                    <label class="form-field-header-label">YOUR CAR:</label>
+                        
+                                    <div class="split-horizontal-input-row">
+                                        <input id="car-year" name="car_year" type="text" inputmode="numeric" maxlength="4" placeholder="Year">
+                                    </div>
+                                    <div id="year-error-msg" class="year-error-tooltip">Please double-check and confirm the year of your car.</div>
+                        
+                                    <div class="split-horizontal-input-row">
+                                        <input id="car-make" name="car_make" type="text" placeholder="Make">
+                                        <input id="car-model" name="car_model" type="text" placeholder="Model">
+                                    </div>
+                                </div>
+                        
+                                <!-- CALENDAR GRAPHIC SELECTOR -->
+                                <div class="composite-field-block calendar-graphic-block">
+                                    <label class="form-field-header-label">&nbsp;</label>
+                                    <button type="button" class="calendar-select-btn">
+                                        <img src="icon-calendar.png" alt="Select Date" class="calendar-graphic-img">
+                                    </button>
+                                    <input id="preferred-date" name="preferred_date" type="date" class="hidden-date-input">
+                                </div>
+                        
+                                <!-- PREFERRED TIME (vertical buttons) -->
+                                <div class="composite-field-block preferred-time-block">
+                                    <span class="form-field-header-label">PREFERRED TIME:</span>
+                                    <div class="vertical-radio-selection-list">
+                                        <label><input type="radio" name="time_slot_pref" value="morning"> Morning</label>
+                                        <label><input type="radio" name="time_slot_pref" value="afternoon"> Afternoon</label>
+                                        <label><input type="radio" name="time_slot_pref" value="evening"> Evening</label>
+                                    </div>
+                                </div>
+                        
+                            </div> <!-- end top composite row -->
+                        
+                            <!-- CONTACT INFO ROW -->
+                            <div class="contact-info-row">
+                                <input id="customer-name" name="customer_name" type="text" placeholder="Your Name">
+                                <input id="car-email" name="car_email" type="email" placeholder="Your Email">
+                                <input id="customer-phone" name="customer_phone" type="tel" placeholder="Phone">
+                            </div>
+                        
+                            <!-- ========================= -->
+                            <!--  SERVICE NEEDED MATRIX    -->
+                            <!-- ========================= -->
+                            <div class="service-needed-header">SERVICE TYPE:</div>
+                        
+                            <div class="multi-column-checkbox-matrix-container">
+                                <label><input type="checkbox" name="service_needed[]" value="oil-change"> Oil Change</label>
+                                <label><input type="checkbox" name="service_needed[]" value="brakes"> Brakes</label>
+                                <label><input type="checkbox" name="service_needed[]" value="tires"> Tires</label>
+                                <label><input type="checkbox" name="service_needed[]" value="tune-up"> Tune-Up</label>
+                                <label><input type="checkbox" name="service_needed[]" value="suspension"> Suspension</label>
+                                <label><input type="checkbox" name="service_needed[]" value="alignment"> Alignment</label>
+                                <label><input type="checkbox" name="service_needed[]" value="inspection"> Inspection</label>
+                                <label><input type="checkbox" name="service_needed[]" value="other"> Other</label>
+                            </div>
+                        
+                            <!-- ========================= -->
+                            <!--  NOTES FIELD              -->
+                            <!-- ========================= -->
+                            <div class="form-vertical-notes-block">
+                                <label class="form-field-header-label" for="specific-notes">SPECIFIC CONCERNS/NOTES:</label>
+                                <textarea id="specific-notes" name="specific_notes" rows="5"></textarea>
+                            </div>
+                        
+                            <!-- ========================= -->
+                            <!--  SUBMIT BUTTON            -->
+                            <!-- ========================= -->
+                            <div class="shuttle-slider-action-wrapper">
+                                <img src="icon-arrow-left.png" alt="" class="decorative-chevron">
+                                <button type="submit" class="shuttle-slider-submit-btn">
+                                    <span class="btn-text-content-label">SUBMIT APPOINTMENT REQUEST</span>
+                                </button>
+                                <img src="icon-arrow-right.png" alt="" class="decorative-chevron">
+                            </div>
+
+                            <div id="form-confirmation-msg" class="form-confirmation-message" style="display:none;"></div>
+                        
+                        </form>
+                        
+                    </div>
+                </div>
+
+            </main>
+
+            <img src="divider-footer.png" alt="" class="vintage-section-divider-rule">
+
+            <footer class="vintage-print-footer-container">
+                <div class="footer-stamp-emblem-badge">
+                    <img src="logo-stamp.png" alt="True Spec Mini Logo Stamp" class="footer-logo-image">
+                </div>
+                <div class="footer-address-details-block">
+                    <h2>TRUE SPEC AUTO GARAGE</h2>
+                    <h3>FULL SERVICE AUTOMOTIVE CARE</h3>
+                    <p>1420 CARR STREET &bull; LAKEWOOD, CO 80214</p>
+                    <p><strong>Phone:</strong> 720-539-6661</p>
+                </div>
+                <div class="footer-horizontal-triple-accent-lines">
+                    <span></span><span></span><span></span>
+                </div>
+            </footer>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Small helper style for screen-reader-only labels (add to your CSS if you don't already have it) -->
+    <style>
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
+    
+   <script>
+    document.querySelector(".calendar-select-btn").addEventListener("click", () => {
+        document.getElementById("preferred-date").showPicker();
+    });
+
+    const notesArea = document.getElementById("specific-notes");
+    if (notesArea) {
+        notesArea.addEventListener("input", function() {
+            this.style.height = "auto";
+            this.style.height = this.scrollHeight + "px";
+        });
+    }
+
+    const yearInput = document.getElementById("car-year");
+    const yearError = document.getElementById("year-error-msg");
+    const makeInput = document.getElementById("car-make");
+    const modelInput = document.getElementById("car-model");
+    const calendarBtn = document.querySelector(".calendar-select-btn");
+    const submitBtn = document.querySelector(".shuttle-slider-submit-btn");
+    let yearErrorTimer = null;
+    let useNativeFallback = !yearError;
+    let yearWasInvalid = false;
+    let suppressedByException = false;
+
+    function isYearInvalid() {
+        if (!yearInput || !yearInput.value) return false;
+        var val = parseInt(yearInput.value, 10);
+        return val < 1885 || val > 2077;
+    }
+
+    function showYearError() {
+        if (useNativeFallback) { alert("Please double-check and confirm the year of your car."); return; }
+        clearTimeout(yearErrorTimer);
+        yearError.classList.add("visible");
+        yearErrorTimer = setTimeout(function() { yearError.classList.remove("visible"); }, 4000);
+        yearWasInvalid = true;
+    }
+
+    function hideYearError() {
+        if (useNativeFallback) return;
+        clearTimeout(yearErrorTimer);
+        yearError.classList.remove("visible");
+    }
+
+    function handleYearBlur() {
+        if (isYearInvalid()) { yearWasInvalid = true; showYearError(); }
+    }
+
+    if (yearInput) {
+        yearInput.addEventListener("input", function() {
+            this.value = this.value.replace(/[^0-9]/g, "").slice(0, 4);
+            if (yearWasInvalid) { hideYearError(); yearWasInvalid = false; }
+        });
+        yearInput.addEventListener("blur", function(e) {
+            if (isYearInvalid()) { yearWasInvalid = true; }
+            var related = e.relatedTarget;
+            if (related === makeInput || related === modelInput || related === calendarBtn) {
+                suppressedByException = true;
+                return;
+            }
+            suppressedByException = false;
+            handleYearBlur();
+        });
+        yearInput.addEventListener("focus", function() {
+            if (suppressedByException && yearWasInvalid) { showYearError(); suppressedByException = false; }
+        });
+        yearInput.addEventListener("keydown", function(e) {
+            if (e.key === "Tab") { handleYearBlur(); }
+        });
+    }
+
+    if (makeInput) makeInput.addEventListener("blur", function(e) {
+        var next = e.relatedTarget;
+        if (next === modelInput || next === calendarBtn || next === yearInput) { suppressedByException = true; return; }
+        if (suppressedByException && yearWasInvalid) { showYearError(); }
+        suppressedByException = false;
+    });
+    if (modelInput) modelInput.addEventListener("blur", function(e) {
+        var next = e.relatedTarget;
+        if (next === makeInput || next === calendarBtn || next === yearInput) { suppressedByException = true; return; }
+        if (suppressedByException && yearWasInvalid) { showYearError(); }
+        suppressedByException = false;
+    });
+    if (calendarBtn) calendarBtn.addEventListener("blur", function(e) {
+        var next = e.relatedTarget;
+        if (next === makeInput || next === modelInput || next === yearInput) { suppressedByException = true; return; }
+        if (suppressedByException && yearWasInvalid) { showYearError(); }
+        suppressedByException = false;
+    });
+
+    if (submitBtn) submitBtn.addEventListener("click", function(e) {
+        if (isYearInvalid()) { e.preventDefault(); showYearError(); yearInput.focus(); return; }
+        var form = document.querySelector(".vintage-dashboard-form");
+        var confirmMsg = document.getElementById("form-confirmation-msg");
+        if (form && confirmMsg) {
+            e.preventDefault();
+            var name = document.getElementById("customer-name").value || "there";
+            confirmMsg.innerHTML = "Thank you for scheduling with True Spec Auto Garage, <strong>" + name + "</strong>! Your appointment request has been received and will be reviewed shortly. You will be notified with a confirmed appointment time via email and/or text.";
+            confirmMsg.style.display = "block";
+            form.style.display = "none";
+        }
+    });
+    </script>
+    
+</body>
+</html>
