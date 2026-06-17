@@ -159,9 +159,17 @@
                         
                             <!-- CONTACT INFO ROW -->
                             <div class="contact-info-row">
-                                <input id="customer-name" name="customer_name" type="text" placeholder="Your Name">
-                                <input id="car-email" name="car_email" type="email" placeholder="Your Email">
-                                <input id="customer-phone" name="customer_phone" type="tel" placeholder="Phone">
+                                <div class="contact-field-wrapper">
+                                    <input id="customer-name" name="customer_name" type="text" placeholder="Your Name">
+                                </div>
+                                <div class="contact-field-wrapper">
+                                    <input id="car-email" name="car_email" type="email" placeholder="Your Email">
+                                    <div id="email-error-msg" class="year-error-tooltip">Please enter a valid email (e.g. name@example.com).</div>
+                                </div>
+                                <div class="contact-field-wrapper">
+                                    <input id="customer-phone" name="customer_phone" type="tel" placeholder="Phone">
+                                    <div id="phone-error-msg" class="year-error-tooltip">Please enter a valid 10-digit phone number.</div>
+                                </div>
                             </div>
                         
                             <!-- ========================= -->
@@ -334,10 +342,88 @@
         suppressedByException = false;
     });
 
+    var emailInput = document.getElementById("car-email");
+    var emailError = document.getElementById("email-error-msg");
+    var emailTimer = null;
+
+    function isEmailInvalid(val) {
+        if (!val) return false;
+        return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    }
+
+    function showEmailError() {
+        if (!emailError) return;
+        clearTimeout(emailTimer);
+        emailError.classList.add("visible");
+        emailTimer = setTimeout(function() { emailError.classList.remove("visible"); }, 4000);
+    }
+
+    function hideEmailError() {
+        if (!emailError) return;
+        clearTimeout(emailTimer);
+        emailError.classList.remove("visible");
+    }
+
+    if (emailInput) {
+        emailInput.addEventListener("blur", function() {
+            if (isEmailInvalid(this.value)) showEmailError();
+        });
+        emailInput.addEventListener("focus", function() { hideEmailError(); });
+    }
+
+    var phoneInput = document.getElementById("customer-phone");
+    var phoneError = document.getElementById("phone-error-msg");
+    var phoneTimer = null;
+
+    function stripPhone(val) {
+        return val.replace(/[^0-9]/g, "");
+    }
+
+    function isPhoneInvalid(val) {
+        var digits = stripPhone(val);
+        if (digits.length === 0) return false;
+        if (digits.length === 11 && (digits.startsWith("1") || digits.startsWith("+1"))) return false;
+        return digits.length !== 10;
+    }
+
+    function formatPhone(val) {
+        var digits = stripPhone(val);
+        if (digits.length === 11) digits = digits.slice(1);
+        if (digits.length !== 10) return val;
+        return digits.slice(0, 3) + "-" + digits.slice(3, 6) + "-" + digits.slice(6);
+    }
+
+    function showPhoneError() {
+        if (!phoneError) return;
+        clearTimeout(phoneTimer);
+        phoneError.classList.add("visible");
+        phoneTimer = setTimeout(function() { phoneError.classList.remove("visible"); }, 4000);
+    }
+
+    function hidePhoneError() {
+        if (!phoneError) return;
+        clearTimeout(phoneTimer);
+        phoneError.classList.remove("visible");
+    }
+
+    if (phoneInput) {
+        phoneInput.addEventListener("blur", function() {
+            if (isPhoneInvalid(this.value)) {
+                showPhoneError();
+            } else if (this.value) {
+                this.value = formatPhone(this.value);
+            }
+        });
+        phoneInput.addEventListener("focus", function() { hidePhoneError(); });
+    }
+
     if (submitBtn) submitBtn.addEventListener("click", function() {
         var form = document.querySelector(".vintage-dashboard-form");
         var confirmMsg = document.getElementById("form-confirmation-msg");
         if (!form || !confirmMsg) return;
+
+        if (emailInput && isEmailInvalid(emailInput.value)) { showEmailError(); emailInput.focus(); return; }
+        if (phoneInput && isPhoneInvalid(phoneInput.value)) { showPhoneError(); phoneInput.focus(); return; }
 
         var services = [];
         form.querySelectorAll('input[name="service_needed[]"]:checked').forEach(function(cb) {
