@@ -114,7 +114,7 @@
                     <div class="vintage-scheduling-panel-box">
                         <h3 class="scheduling-panel-header-banner">RELIABLE SERVICE ON YOUR SCHEDULE!</h3>
                         
-                        <form class="vintage-dashboard-form" onsubmit="event.preventDefault();">
+                        <form class="vintage-dashboard-form">
 
                             <!-- ========================= -->
                             <!--  TOP ROW: CAR INFO        -->
@@ -335,8 +335,9 @@
     });
 
     if (submitBtn) submitBtn.addEventListener("click", function(e) {
-        if (isYearInvalid()) { e.preventDefault(); showYearError(); yearInput.focus(); return; }
         e.preventDefault();
+        if (isYearInvalid()) { showYearError(); yearInput.focus(); return; }
+
         var form = document.querySelector(".vintage-dashboard-form");
         var confirmMsg = document.getElementById("form-confirmation-msg");
         if (!form || !confirmMsg) return;
@@ -361,29 +362,39 @@
 
         submitBtn.disabled = true;
         submitBtn.querySelector(".btn-text-content-label").textContent = "SUBMITTING...";
+        confirmMsg.style.display = "none";
 
         fetch("/.netlify/functions/submit-appointment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         })
-        .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, status: res.status, data: d }; }); })
-        .then(function(result) {
-            console.log("Submit response:", result);
-            if (!result.ok) {
-                confirmMsg.innerHTML = "Error: " + (result.data.error || "Unknown error. Please call us.");
-            } else {
-                confirmMsg.innerHTML = result.data.message || "Your request has been received!";
-            }
+        .then(function(response) {
+            console.log("HTTP status:", response.status);
+            return response.text();
+        })
+        .then(function(text) {
+            console.log("Raw response:", text);
+            var data;
+            try { data = JSON.parse(text); } catch(e) { data = { error: "Invalid response: " + text }; }
+            console.log("Parsed:", data);
+
             confirmMsg.style.display = "block";
-            form.style.display = "none";
+            if (data.error) {
+                confirmMsg.innerHTML = "<strong>Error:</strong> " + data.error;
+            } else {
+                confirmMsg.innerHTML = data.message || "Your request has been received!";
+                form.reset();
+            }
         })
         .catch(function(err) {
-            console.error("Submit error:", err);
+            console.error("Fetch failed:", err);
+            confirmMsg.style.display = "block";
+            confirmMsg.innerHTML = "<strong>Network error:</strong> " + err.message;
+        })
+        .finally(function() {
             submitBtn.disabled = false;
             submitBtn.querySelector(".btn-text-content-label").textContent = "SUBMIT APPOINTMENT REQUEST";
-            confirmMsg.innerHTML = "Something went wrong: " + err.message;
-            confirmMsg.style.display = "block";
         });
     });
     </script>
