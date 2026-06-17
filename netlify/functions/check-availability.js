@@ -1,4 +1,4 @@
-const { getSheets, getSheetId } = require("./_sheets.js");
+const { getSheets, getSheetId } = require("./sheets.js");
 
 const AUTO_HOURS = { "Mon-Fri": { open: 8, close: 18 }, "Sat": { open: 9, close: 14 }, "Sun": null };
 const TIRE_HOURS = { "Mon-Sun": { open: 7.5, close: 19 } };

@@ -1,4 +1,4 @@
-const { getSheets, getSheetId } = require("./_sheets.js");
+const { getSheets, getSheetId } = require("./sheets.js");
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
