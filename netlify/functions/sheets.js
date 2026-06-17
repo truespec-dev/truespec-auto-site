@@ -18,4 +18,13 @@ function getSheetId() {
   return process.env.GOOGLE_SHEET_ID;
 }
 
-module.exports = { getSheets, getSheetId };
+async function safeGetValues(sheets, spreadsheetId, range) {
+  try {
+    const res = await sheets.spreadsheets.values.get({ spreadsheetId, range });
+    return res.data.values || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+module.exports = { getSheets, getSheetId, safeGetValues };

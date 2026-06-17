@@ -1,4 +1,4 @@
-const { getSheets, getSheetId } = require("./sheets.js");
+const { getSheets, getSheetId, safeGetValues } = require("./sheets.js");
 
 const AUTO_HOURS = { "Mon-Fri": { open: 8, close: 18 }, "Sat": { open: 9, close: 14 }, "Sun": null };
 const TIRE_HOURS = { "Mon-Sun": { open: 7.5, close: 19 } };
@@ -38,11 +38,8 @@ exports.handler = async (event) => {
     const sheets = getSheets();
     const spreadsheetId = getSheetId();
 
-    const aptRes = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: "Appointments!A:J",
-    });
-    const appointments = (aptRes.data.values || []).slice(1);
+    const allApts = await safeGetValues(sheets, spreadsheetId, "Appointments!A:J");
+    const appointments = allApts.slice(1);
 
     const dayApts = appointments.filter((r) => r[3] === date && r[7] !== "Cancelled" && r[7] !== "Declined");
 

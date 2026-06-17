@@ -1,4 +1,4 @@
-const { getSheets, getSheetId } = require("./sheets.js");
+const { getSheets, getSheetId, safeGetValues } = require("./sheets.js");
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -22,11 +22,7 @@ exports.handler = async (event) => {
     const spreadsheetId = getSheetId();
 
     // Check/create customer
-    const custRes = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: "Customers!A:F",
-    });
-    const customers = custRes.data.values || [];
+    const customers = await safeGetValues(sheets, spreadsheetId, "Customers!A:F");
     let customerId = null;
     const existingRow = customers.find(
       (r) => r[1]?.toLowerCase() === customer_name.toLowerCase() && r[3] === customer_phone
@@ -46,11 +42,7 @@ exports.handler = async (event) => {
     }
 
     // Check/create vehicle
-    const vehRes = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: "Vehicles!A:F",
-    });
-    const vehicles = vehRes.data.values || [];
+    const vehicles = await safeGetValues(sheets, spreadsheetId, "Vehicles!A:F");
     let vehicleId = null;
     const existingVeh = vehicles.find(
       (r) => r[1] === customerId && r[2] === car_year && r[3]?.toLowerCase() === car_make.toLowerCase() && r[4]?.toLowerCase() === car_model.toLowerCase()
@@ -70,11 +62,7 @@ exports.handler = async (event) => {
     }
 
     // Create appointment
-    const aptRes = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: "Appointments!A:J",
-    });
-    const appointments = aptRes.data.values || [];
+    const appointments = await safeGetValues(sheets, spreadsheetId, "Appointments!A:J");
     const nextAid = "A" + String(appointments.length).padStart(3, "0");
 
     const services = Array.isArray(service_needed) ? service_needed.join(", ") : service_needed;

@@ -1,4 +1,4 @@
-const { getSheets, getSheetId } = require("./sheets.js");
+const { getSheets, getSheetId, safeGetValues } = require("./sheets.js");
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -15,11 +15,7 @@ exports.handler = async (event) => {
     const sheets = getSheets();
     const spreadsheetId = getSheetId();
 
-    const aptRes = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: "Appointments!A:J",
-    });
-    const rows = aptRes.data.values || [];
+    const rows = await safeGetValues(sheets, spreadsheetId, "Appointments!A:J");
     const rowIndex = rows.findIndex((r) => r[0] === appointment_id);
 
     if (rowIndex === -1) {
