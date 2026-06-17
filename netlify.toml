@@ -2,3 +2,6 @@
   publish = "."
   functions = "netlify/functions"
   command = "echo done"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
