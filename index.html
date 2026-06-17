@@ -336,15 +336,49 @@
 
     if (submitBtn) submitBtn.addEventListener("click", function(e) {
         if (isYearInvalid()) { e.preventDefault(); showYearError(); yearInput.focus(); return; }
+        e.preventDefault();
         var form = document.querySelector(".vintage-dashboard-form");
         var confirmMsg = document.getElementById("form-confirmation-msg");
-        if (form && confirmMsg) {
-            e.preventDefault();
-            var name = document.getElementById("customer-name").value || "there";
-            confirmMsg.innerHTML = "Thank you for scheduling with True Spec Auto Garage, <strong>" + name + "</strong>! Your appointment request has been received and will be reviewed shortly. You will be notified with a confirmed appointment time via email and/or text.";
+        if (!form || !confirmMsg) return;
+
+        var services = [];
+        form.querySelectorAll('input[name="service_needed[]"]:checked').forEach(function(cb) {
+            services.push(cb.value);
+        });
+
+        var payload = {
+            customer_name: document.getElementById("customer-name").value,
+            customer_phone: document.getElementById("customer-phone").value,
+            car_email: document.getElementById("car-email").value,
+            car_year: document.getElementById("car-year").value,
+            car_make: document.getElementById("car-make").value,
+            car_model: document.getElementById("car-model").value,
+            preferred_date: document.getElementById("preferred-date").value,
+            time_slot_pref: (form.querySelector('input[name="time_slot_pref"]:checked') || {}).value || "",
+            service_needed: services,
+            specific_notes: document.getElementById("specific-notes").value,
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.querySelector(".btn-text-content-label").textContent = "SUBMITTING...";
+
+        fetch("/.netlify/functions/submit-appointment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+            confirmMsg.innerHTML = data.message || "Your request has been received!";
             confirmMsg.style.display = "block";
             form.style.display = "none";
-        }
+        })
+        .catch(function(err) {
+            submitBtn.disabled = false;
+            submitBtn.querySelector(".btn-text-content-label").textContent = "SUBMIT APPOINTMENT REQUEST";
+            confirmMsg.innerHTML = "Something went wrong. Please try again or call us directly.";
+            confirmMsg.style.display = "block";
+        });
     });
     </script>
     
